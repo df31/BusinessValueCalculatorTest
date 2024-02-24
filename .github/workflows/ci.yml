@@ -10,7 +10,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_test:
+
+    env:
+      BUILD_CONFIG:  'Release'
+      SOLUTION: 'BusinessValueCalculaterTest.sln'
 
     runs-on: ubuntu-latest
 
@@ -25,15 +29,16 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Build Projrct
-      run: dotnet build --configuration Release --no-restore
+    - name: Build Project
+      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore
       
     - name: Run Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;logFileName=testResult.trx"
       continue-on-error: true
       
     - name: Publish Test Results
-      uses: actions/upload-artifact@v2
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
         name: test-results
-        path: test-results.xml
+        path: "testResult.trx"
