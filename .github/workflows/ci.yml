@@ -26,10 +26,10 @@ jobs:
       run: dotnet restore
       
     - name: Build Projrct
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release --no-restore
       
     - name: Run Test
-      run: dotnet test  --configuration Release --logger "LogFilePath=test-results.xml"
+      run: dotnet test --no-restore --verbosity normal
 
     - name: Publish Test Results
       uses: actions/upload-artifact@v2
