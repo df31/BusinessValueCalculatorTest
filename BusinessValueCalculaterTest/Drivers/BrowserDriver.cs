@@ -37,7 +37,7 @@ namespace BusinessValueCalculaterTest.Drivers
             chromeOptions.AddArgument("--remote-debugging-pipe");
             chromeOptions.AddAdditionalOption("useAutomationExtension", false);
 
-            var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
+            var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions, TimeSpan.FromSeconds(120));
 
             return chromeDriver;
         }
