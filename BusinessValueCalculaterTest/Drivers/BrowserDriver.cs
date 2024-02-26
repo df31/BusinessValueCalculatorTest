@@ -34,6 +34,7 @@ namespace BusinessValueCalculaterTest.Drivers
             chromeOptions.AddArgument("start-maximized");
             chromeOptions.AddArguments("disable-extensions");
             chromeOptions.AddArgument("ignore-certificate-errors");
+            chromeOptions.AddArgument("--remote-debugging-pipe");
             chromeOptions.AddAdditionalOption("useAutomationExtension", false);
 
             var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
